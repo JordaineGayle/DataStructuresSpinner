@@ -1,8 +1,8 @@
 package structures;
 
 public class SinglyGenericNode<T> {
-    T Data;
-    SinglyGenericNode<T> NextNode;
+    private T Data;
+    private SinglyGenericNode<T> NextNode;
 
     public SinglyGenericNode(T data, SinglyGenericNode<T> nextNode) throws Exception{
         ValidateData(data);

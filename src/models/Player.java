@@ -30,33 +30,32 @@ public class Player
     }
 
     //accessors and mutators
-    public String getName() {
+    public String GetName() {
         return Name;
     }
 
-    public void setName(String name) {
+    public void SetName(String name) {
         Name = name;
     }
 
-    public int getNumber() {
+    public int GetNumber() {
         return Number;
     }
 
-    public void setNumber(int number) {
+    public void SetNumber(int number) {
         Number = number;
     }
 
-    public double getGrandTotal() {
+    public double GetGrandTotal() {
         return GrandTotal;
     }
 
-    public void setGrandTotal(double grandTotal) {
+    public void SetGrandTotal(double grandTotal) {
         GrandTotal = grandTotal;
     }
 
-    @Override
-    public String toString() {
-        return "";
+    public String ToString() {
+        return "[Name: "+Name+", Number: "+Number+", GrandTotal: "+GrandTotal+"]";
     }
 }
 
