@@ -43,8 +43,12 @@ public class Card {
         if(type == CardTypes.MONEY && !(value  >= 500 && value <= 2500)){
             throw new Exception("ERROR: When creating a money card the accepted value must be between $500.00 and $2500.00");
         }
-        else if(value > 0){
+        else if(type != CardTypes.MONEY && value > 0){
             throw new Exception("ERROR: When creating a "+type.name()+" the value must be $0.00.");
         }
+    }
+
+    public void ToString(){
+        System.out.println("[CardType: "+Type.name()+", Value: "+Value+"]");
     }
 }

@@ -1,27 +1,24 @@
 package structures;
 
-import models.Player;
+import models.Card;
 
-//this data structure was used, because the size of the players wasn't explicitly specified
-public class Players {
-
+public class GenericCircularlyLinkedList<T> {
     int Length;
-    SinglyGenericNode<Player> Head;
+    SinglyGenericNode<T> Head;
 
-    public Players()
+    public GenericCircularlyLinkedList()
     {
         Length = 0;
         Head = null;
     }
 
-    public Players(SinglyGenericNode<Player> head){
+    public GenericCircularlyLinkedList(SinglyGenericNode<T> head){
         this.Head = head;
     }
 
-    public void Append(Player player) throws Exception
+    public void Append(T data) throws Exception
     {
-        player.SetNumber(Length+1);
-        SinglyGenericNode<Player> newNode = new SinglyGenericNode<>(player,null);
+        SinglyGenericNode<T> newNode = new SinglyGenericNode<>(data,null);
 
         if(this.Head == null)
         {
@@ -31,7 +28,7 @@ public class Players {
         }
         else
         {
-            SinglyGenericNode<Player> nextNode = this.Head.GetNextNode();
+            SinglyGenericNode<T> nextNode = this.Head.GetNextNode();
             while (nextNode.GetNextNode() != this.Head){
                 nextNode = nextNode.GetNextNode();
             }
@@ -41,6 +38,7 @@ public class Players {
         }
     }
 
-
-
+    public final SinglyGenericNode<T> GetHead(){
+        return this.Head;
+    }
 }
