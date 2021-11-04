@@ -33,7 +33,7 @@ public class GuessedLetters {
     }
 
     public GuessedLetter Dequeue(){
-        if(this.Head == null)return null;
+        if(IsEmpty())return null;
         DoublyGenericNode<GuessedLetter> node = this.Head;
         if(this.Head == this.Tail){
             Length--;
@@ -48,6 +48,9 @@ public class GuessedLetters {
     }
 
     public GuessedLetter Peek(){
+        if(!IsEmpty()){
+            return this.Head.GetData();
+        }
         return null;
     }
 
@@ -60,7 +63,7 @@ public class GuessedLetters {
     }
 
     public void Display(){
-        if(Length > 0){
+        if(!IsEmpty()){
             DoublyGenericNode<GuessedLetter> temp = Head;
             while (temp.GetNextNode() != null){
                 System.out.println(temp.GetData().ToString());
@@ -70,13 +73,5 @@ public class GuessedLetters {
         }else{
             System.out.println("Queue is empty");
         }
-    }
-
-    public DoublyGenericNode<GuessedLetter> GetHead(){
-        return this.Head;
-    }
-
-    public DoublyGenericNode<GuessedLetter> GetTail(){
-        return this.Tail;
     }
 }
