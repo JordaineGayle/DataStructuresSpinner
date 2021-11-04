@@ -7,9 +7,9 @@ import models.enums.Categories;
 import java.util.Random;
 
 public class Wheel {
-    int Length = 25;
-    SinglyGenericNode<Card> Head;
-    SinglyGenericNode<Card> CurrentCard;
+    private int Length = 25;
+    private SinglyGenericNode<Card> Head;
+    private  SinglyGenericNode<Card> CurrentCard;
 
     public Wheel()
     {
@@ -46,8 +46,10 @@ public class Wheel {
     }
 
     public SinglyGenericNode<Card> SpinWheel(){
-        int counter = 0;
         SinglyGenericNode<Card> nextNode = Head;
+        if(CurrentCard != null){
+            nextNode = CurrentCard;
+        }
         int totalSpins = GenerateRandomNumber(50,100);
         while(totalSpins > 0){
             nextNode = nextNode.GetNextNode();
@@ -74,8 +76,6 @@ public class Wheel {
                 Append(new Card(cardType,0));
             }
         }
-
-        Display();
     }
 
     public void Display(){

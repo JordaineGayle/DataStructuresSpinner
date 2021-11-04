@@ -11,5 +11,7 @@ public class Game {
     public Game()
     {
         this.Rounds = new Round[3];
+        this.Players = new Players();
+
     }
 }
