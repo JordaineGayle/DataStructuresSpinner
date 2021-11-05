@@ -1,7 +1,7 @@
 package structures;
 
-import models.Card;
 import models.Player;
+import structures.Nodes.SinglyGenericNode;
 
 //this data structure was used, because the size of the players wasn't explicitly specified
 public class Players {

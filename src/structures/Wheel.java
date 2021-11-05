@@ -2,7 +2,7 @@ package structures;
 
 import models.Card;
 import models.enums.CardTypes;
-import models.enums.Categories;
+import structures.Nodes.SinglyGenericNode;
 
 import java.util.Random;
 
@@ -64,7 +64,6 @@ public class Wheel {
     }
 
     public void GenerateCards() throws Exception{
-        Random rand = new Random();
         CardTypes[] cardTypes = CardTypes.values();
         int cardTypesLength = cardTypes.length -1;
         for (int i = 0; i < Length; i++){

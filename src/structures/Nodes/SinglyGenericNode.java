@@ -1,4 +1,4 @@
-package structures;
+package structures.Nodes;
 
 public class SinglyGenericNode<T> {
     private T Data;

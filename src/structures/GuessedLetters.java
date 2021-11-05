@@ -1,7 +1,7 @@
 package structures;
 
-import models.Card;
 import models.GuessedLetter;
+import structures.Nodes.DoublyGenericNode;
 
 public class GuessedLetters {
 

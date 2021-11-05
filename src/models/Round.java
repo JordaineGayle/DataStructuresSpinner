@@ -1,27 +1,35 @@
 package models;
 
 import models.enums.Categories;
+import structures.GuessedLetters;
 
 public class Round {
     String Category;
     String Puzzle;
+    String WordToSolve;
+    GuessedLetters GuessedLetters;
     double[] PlayerTotals;
 
     public Round(){
         Category = Categories.PERSON.name();
         Puzzle = "";
-        PlayerTotals = new double[]{0.00,0.00,0.00};
+        WordToSolve = "";
+        GuessedLetters = new GuessedLetters();
+        PlayerTotals = new double[]{};
     }
 
-    public Round(Categories category, String puzzle, double[] playerTotals){
+    public Round(Categories category, String puzzle, int numOfPlayers){
         this.Category = category.name();
         this.Puzzle = puzzle;
-        this.PlayerTotals = playerTotals;
+        GuessedLetters = new GuessedLetters();
+        WordToSolve = "";
+        this.PlayerTotals = new double[numOfPlayers];
     }
 
     public Round(Round round){
         this.Category = round.Category;
         this.Puzzle = round.Puzzle;
+        GuessedLetters = round.GuessedLetters;
         this.PlayerTotals = round.PlayerTotals;
     }
 
@@ -55,5 +63,14 @@ public class Round {
 
     public double GetPlayerTotal(int index){
         return this.PlayerTotals[index];
+    }
+
+    public String CreatePuzzle(){
+        double percentage = 0.70;
+        return "";
+    }
+
+    public void ToString(){
+        System.out.println("[Category: "+this.Category+", Puzzle: "+this.Puzzle+", PlayerTotals: "+this.PlayerTotals+"]");
     }
 }

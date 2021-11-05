@@ -1,4 +1,4 @@
-package structures;
+package structures.Nodes;
 
 public class DoublyGenericNode<T> {
     private T Data;
