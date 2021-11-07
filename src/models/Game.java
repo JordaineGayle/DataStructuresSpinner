@@ -1,5 +1,6 @@
 package models;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import database.WordsDB;
 import models.Round;
 import models.enums.Categories;
@@ -42,7 +43,15 @@ public class Game {
     private void CreateRounds(){
         for (int x = 0; x < 3; x++){
             Word word = Database.GetRandomWord();
-            this.Rounds[x] = new Round(Categories.valueOf(word.Category),word.Word,this.NumOfPlayers);
+            Round round = null;
+            while (round == null){
+                try{
+                    round = new Round(Categories.valueOf(word.Category),word.Word,this.NumOfPlayers);
+                }catch (InvalidArgumentException e){
+                    round = null;
+                }
+            }
+            this.Rounds[x] = round;
             this.Rounds[x].ToString();
         }
     }
