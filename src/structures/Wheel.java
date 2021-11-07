@@ -7,18 +7,23 @@ import structures.Nodes.SinglyGenericNode;
 import java.util.Random;
 
 public class Wheel {
-    private int Length = 25;
+    private int Length;
     private SinglyGenericNode<Card> Head;
     private  SinglyGenericNode<Card> CurrentCard;
 
-    public Wheel()
+    public Wheel() throws Exception
     {
         Length = 25;
         Head = null;
+        CurrentCard = null;
+        GenerateCards();
     }
 
-    public Wheel(SinglyGenericNode<Card> head){
+    public Wheel(SinglyGenericNode<Card> head) throws Exception{
+        Length = 25;
         this.Head = head;
+        this.CurrentCard = this.Head;
+        GenerateCards();
     }
 
     public void Append(Card card) throws Exception
@@ -41,11 +46,11 @@ public class Wheel {
         }
     }
 
-    public SinglyGenericNode<Card> GetCurrentCard(){
-        return this.CurrentCard;
+    public Card GetCurrentCard(){
+        return this.CurrentCard.GetData();
     }
 
-    public SinglyGenericNode<Card> SpinWheel(){
+    public Card SpinWheel(){
         SinglyGenericNode<Card> nextNode = Head;
         if(CurrentCard != null){
             nextNode = CurrentCard;
@@ -56,7 +61,7 @@ public class Wheel {
             totalSpins--;
         }
         CurrentCard = nextNode;
-        return CurrentCard;
+        return CurrentCard.GetData();
     }
 
     private int GenerateRandomNumber(int min, int max){

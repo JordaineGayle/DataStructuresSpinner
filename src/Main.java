@@ -1,9 +1,4 @@
-import database.WordsDB;
 import models.Game;
-import models.GuessedLetter;
-import models.Player;
-import structures.GuessedLetters;
-import structures.Players;
 
 public class Main {
 

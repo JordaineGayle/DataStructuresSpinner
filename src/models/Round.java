@@ -9,12 +9,14 @@ import structures.KVP;
 import java.util.Random;
 
 public class Round {
-    String Category;
-    String Puzzle;
-    String WordToSolve;
-    GuessedLetters GuessedLetters;
-    CustomDictionary Dictionary;
-    double[] PlayerTotals;
+    private String Category;
+    private String Puzzle;
+    private String WordToSolve;
+    private GuessedLetters GuessedLetters;
+    private CustomDictionary Dictionary;
+    private CustomDictionary TrackedLetters;
+    private double[] PlayerTotals;
+    private int RoundAttempt;
 
     public Round(Categories category, String puzzle, int numOfPlayers) throws InvalidArgumentException{
         if(!IsValidWord(puzzle))
@@ -24,19 +26,85 @@ public class Round {
         this.WordToSolve = CreatePuzzle(puzzle);
         GuessedLetters = new GuessedLetters();
         this.PlayerTotals = new double[numOfPlayers];
+        this.TrackedLetters= new CustomDictionary(1);
+        RoundAttempt = numOfPlayers;
+    }
+
+    public boolean IsGuessable(char letter)
+    {
+        if(TrackedLetters.GetKVP(letter) != null) return false;
+        return true;
+    }
+
+    public KVP IsValidLetter(char letter)
+    {
+        TrackedLetters.Insert(letter,letter);
+        try{
+            GuessedLetters.Enqueue(letter);
+        }catch (Exception e){}
+        return Dictionary.GetKVP(letter);
+    }
+
+    public void UpdateWord(KVP kvp)
+    {
+        StringBuilder builder = new StringBuilder(this.WordToSolve);
+        int[] values = kvp.GetValues();
+        for(int x = 0; x < values.length; x++)
+        {
+            builder.setCharAt(values[x],kvp.GetKey());
+        }
+        this.WordToSolve = builder.toString();
+        System.out.println("Updated word: "+this.WordToSolve);
+    }
+
+    public boolean SolvedWord()
+    {
+        return Puzzle == WordToSolve;
+    }
+
+    public void UpdatePlayerTotal(int index, double amount)
+    {
+        PlayerTotals[index] += amount;
+    }
+
+    public double GetPlayerTotal(int index)
+    {
+        return PlayerTotals[index];
+    }
+
+    public void UpdateRoundAttempt()
+    {
+        RoundAttempt--;
+    }
+
+    public String GetWordToSolve()
+    {
+        return this.WordToSolve;
+    }
+
+    public String GetPuzzle()
+    {
+        return this.Puzzle;
+    }
+
+    public int GetRoundAttempt()
+    {
+        return this.RoundAttempt;
+    }
+
+    public void DisplayGuessedLetters(){
+        GuessedLetters.Display();
     }
 
     private String CreatePuzzle(String word){
-        String nonSpaceWord = word.replaceAll(" ","");
-        int nonSpacedWordCount = nonSpaceWord.length();
-        this.Dictionary = new CustomDictionary(nonSpacedWordCount);
+        int wordLength = word.length();
+        this.Dictionary = new CustomDictionary(wordLength);
         StringBuilder newWord = new StringBuilder(word);
         Random rand = new Random();
-        int wordLength = word.length();
         double percentage = 0.70;
         int maxLetters = (int)(wordLength * percentage);
         String[] positionUsed = new String[wordLength];
-        while (nonSpacedWordCount > 0){
+        while (wordLength > 0){
             if(maxLetters > 0)
             {
                 int index = rand.nextInt(wordLength);
@@ -47,8 +115,8 @@ public class Round {
                     maxLetters--;
                 }
             }else{
-                Dictionary.Insert(nonSpaceWord.charAt(nonSpacedWordCount-1),nonSpacedWordCount-1);
-                nonSpacedWordCount--;
+                Dictionary.Insert(this.Puzzle.charAt(wordLength-1),wordLength-1);
+                wordLength--;
             }
         }
         return newWord.toString();

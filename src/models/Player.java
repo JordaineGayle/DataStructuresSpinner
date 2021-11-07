@@ -3,9 +3,9 @@ package models;
 public class Player
 {
     //attributes
-    String Name;
-    int Number;
-    double GrandTotal;
+    private String Name;
+    private int Number;
+    private double GrandTotal;
 
     //default constructor
     public Player()
@@ -51,7 +51,7 @@ public class Player
     }
 
     public void SetGrandTotal(double grandTotal) {
-        GrandTotal = grandTotal;
+        GrandTotal+=grandTotal;
     }
 
     public String ToString() {

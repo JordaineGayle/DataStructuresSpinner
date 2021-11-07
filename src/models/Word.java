@@ -3,8 +3,8 @@ package models;
 import models.enums.Categories;
 
 public class Word {
-    String Category;
-    String Word;
+    private String Category;
+    private String Word;
 
     public Word()
     {

@@ -1,12 +1,11 @@
 package structures;
 
-import models.GuessedLetter;
 import structures.Nodes.DoublyGenericNode;
 
 public class GuessedLetters {
 
-    DoublyGenericNode<GuessedLetter> Head;
-    DoublyGenericNode<GuessedLetter> Tail;
+    DoublyGenericNode<Character> Head;
+    DoublyGenericNode<Character> Tail;
     int Length;
 
     public GuessedLetters()
@@ -16,9 +15,9 @@ public class GuessedLetters {
         this.Length = 0;
     }
 
-    public void Enqueue(GuessedLetter guess) throws Exception{
+    public void Enqueue(Character guess) throws Exception{
         if(guess == null)return;
-        DoublyGenericNode<GuessedLetter> node = new DoublyGenericNode<>(guess,null,null);
+        DoublyGenericNode<Character> node = new DoublyGenericNode<>(guess,null,null);
         if(this.Head == null){
             this.Tail = node;
             this.Head = this.Tail;
@@ -32,9 +31,9 @@ public class GuessedLetters {
         Length++;
     }
 
-    public GuessedLetter Dequeue(){
+    public Character Dequeue(){
         if(IsEmpty())return null;
-        DoublyGenericNode<GuessedLetter> node = this.Head;
+        DoublyGenericNode<Character> node = this.Head;
         if(this.Head == this.Tail){
             Length--;
             this.Head = null;
@@ -47,7 +46,7 @@ public class GuessedLetters {
         return node.GetData();
     }
 
-    public GuessedLetter Peek(){
+    public Character Peek(){
         if(!IsEmpty()){
             return this.Head.GetData();
         }
@@ -64,14 +63,15 @@ public class GuessedLetters {
 
     public void Display(){
         if(!IsEmpty()){
-            DoublyGenericNode<GuessedLetter> temp = Head;
+            System.out.print("Letters Guessed: ");
+            DoublyGenericNode<Character> temp = Head;
             while (temp.GetNextNode() != null){
-                System.out.println(temp.GetData().ToString());
+                System.out.print(temp.GetData().charValue());
                 temp = temp.GetNextNode();
             }
-            System.out.println(temp.GetData().ToString());
+            System.out.print(temp.GetData().charValue());
         }else{
-            System.out.println("Queue is empty");
+            System.out.println("No Letters Guessed");
         }
     }
 }

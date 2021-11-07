@@ -23,6 +23,11 @@ public class KVP {
         return this.Values;
     }
 
+    public char GetKey()
+    {
+        return (char)Key;
+    }
+
     public void Display(){
         System.out.print("Key: "+(char)Key+", Values: [");
         for (int x =0; x < CurrentPosition; x++){
