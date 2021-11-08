@@ -47,11 +47,17 @@ public class Round {
 
     public void UpdateWord(KVP kvp)
     {
+        System.out.println("WordToSolve: "+this.WordToSolve);
         StringBuilder builder = new StringBuilder(this.WordToSolve);
-        int[] values = kvp.GetValues();
+        String[] values = kvp.GetValues();
+        char key = kvp.GetKey();
         for(int x = 0; x < values.length; x++)
         {
-            builder.setCharAt(values[x],kvp.GetKey());
+            System.out.println("Key: "+key+"; Value: "+values[x]);
+            if(values[x] != null)
+            {
+                builder.setCharAt(Integer.parseInt(values[x]),key);
+            }
         }
         this.WordToSolve = builder.toString();
         System.out.println("Updated word: "+this.WordToSolve);
@@ -104,21 +110,26 @@ public class Round {
         double percentage = 0.70;
         int maxLetters = (int)(wordLength * percentage);
         String[] positionUsed = new String[wordLength];
-        while (wordLength > 0){
-            if(maxLetters > 0)
-            {
-                int index = rand.nextInt(wordLength);
-                char letter = word.charAt(index);
-                if(letter != ' ' && positionUsed[index] == null){
-                    newWord.setCharAt(index,'_');
-                    positionUsed[index] = new String(new char[] {letter});
-                    maxLetters--;
-                }
-            }else{
-                Dictionary.Insert(this.Puzzle.charAt(wordLength-1),wordLength-1);
-                wordLength--;
+        while (maxLetters > 0){
+            int index = rand.nextInt(wordLength);
+            char letter = word.charAt(index);
+            if(letter != ' ' && positionUsed[index] == null){
+                newWord.setCharAt(index,'_');
+                positionUsed[index] = new String(new char[] {letter});
+                Dictionary.Insert(letter,index);
+                maxLetters--;
             }
         }
+        System.out.println("Round: ");
+        for(int x = 0; x < 127; x++){
+            KVP kvp = Dictionary.GetKVP((char)x);
+            if(kvp != null){
+
+                kvp.Display();
+            }
+        }
+        System.out.println("Puzzle: "+Puzzle.toString());
+        System.out.println("Puzzle_Missing: "+newWord.toString());
         return newWord.toString();
     }
 

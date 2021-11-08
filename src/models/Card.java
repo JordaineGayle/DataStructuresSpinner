@@ -49,6 +49,6 @@ public class Card {
     }
 
     public void ToString(){
-        System.out.println("[CardType: "+Type.name()+", Value: "+Value+"]");
+        System.out.println("[CardType: "+Type.name()+", Value: $"+Value+"]");
     }
 }

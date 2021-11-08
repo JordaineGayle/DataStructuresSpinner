@@ -3,6 +3,7 @@ package models;
 import com.sun.javaws.exceptions.InvalidArgumentException;
 import database.WordsDB;
 import models.Round;
+import models.enums.CardTypes;
 import models.enums.Categories;
 import structures.KVP;
 import structures.Nodes.SinglyGenericNode;
@@ -60,6 +61,7 @@ public class Game {
         int roundLength = this.Rounds.length;
         while(CurrentRound < roundLength)
         {
+            System.out.println("Round Number: "+(CurrentRound+1));
             System.out.println("Player Info");
             System.out.println("Player Number: "+player.GetNumber());
             System.out.println("Player Name: "+player.GetName());
@@ -67,7 +69,23 @@ public class Game {
             if(result == 'a')
             {
                 Wheel.SpinWheel();
-                roundResult = GuessLetter();
+                System.out.print("Spin Result: ");
+                Wheel.GetCurrentCard().ToString();
+                if(Wheel.GetCurrentCard().GetType() != CardTypes.MONEY)
+                {
+                    if(Wheel.GetCurrentCard().GetType() == CardTypes.BANKRUPTCY)
+                    {
+                        double roundTotal = round.GetPlayerTotal(player.GetNumber() - 1) * -1;
+                        round.UpdatePlayerTotal(player.GetNumber() - 1,roundTotal);
+                    }
+
+                    roundResult = LOST_ROUND;
+                }
+                else
+                {
+                    roundResult = GuessLetter();
+                }
+
             }
             else if(result == 'b')
             {
@@ -85,11 +103,13 @@ public class Game {
             if(roundResult == WON_ROUND)
             {
                 CurrentRound++;
+                round = Rounds[CurrentRound];
                 player.SetGrandTotal(round.GetPlayerTotal(player.GetNumber()-1));
             }
             else if(roundResult == LOST_ROUND)
             {
                 CurrentPlayerNode = CurrentPlayerNode.GetNextNode();
+                player = CurrentPlayerNode.GetData();
                 round = Rounds[CurrentRound];
                 round.UpdateRoundAttempt();
                 if(round.GetRoundAttempt() <= 0)
@@ -134,7 +154,7 @@ public class Game {
     private char Menu()
     {
         Scanner sc = new Scanner(System.in);
-        System.out.println("\nMenu");
+        System.out.println("Menu");
         System.out.println("a) Spin Wheel");
         System.out.println("b) Buy A Vowel");
         System.out.println("c) Solve Puzzle");
@@ -156,17 +176,19 @@ public class Game {
             System.out.println("Letter Guessed Already, Try Again.");
             GuessLetter();
         }
-
-        KVP kvp = round.IsValidLetter(letter);
-        if(kvp != null)
+        else
         {
-            round.UpdateWord(kvp);
-            double roundTotal = kvp.GetValues().length * Wheel.GetCurrentCard().GetValue();
-            round.UpdatePlayerTotal(CurrentPlayerNode.GetData().GetNumber() - 1,roundTotal);
+            KVP kvp = round.IsValidLetter(letter);
+            if(kvp != null)
+            {
+                round.UpdateWord(kvp);
+                double roundTotal = kvp.GetValues().length * Wheel.GetCurrentCard().GetValue();
+                round.UpdatePlayerTotal(CurrentPlayerNode.GetData().GetNumber() - 1,roundTotal);
 
-            if(round.SolvedWord())
-                return WON_ROUND;
-            return ACTIVE_ROUND;
+                if(round.SolvedWord())
+                    return WON_ROUND;
+                return ACTIVE_ROUND;
+            }
         }
         return LOST_ROUND;
     }

@@ -1,24 +1,24 @@
 package structures;
 
 public class KVP {
-    int Key;
-    int[] Values;
+    char Key;
+    String[] Values;
     int CurrentPosition;
 
     public KVP(int length)
     {
         CurrentPosition = 0;
-        this.Values = new int[length];
+        this.Values = new String[length];
     }
 
-    public void Insert(int key, int value)
+    public void Insert(char key, int value)
     {
         this.Key = key;
-        Values[CurrentPosition] = value;
+        Values[CurrentPosition] = Integer.toString(value);
         CurrentPosition++;
     }
 
-    public int[] GetValues()
+    public String[] GetValues()
     {
         return this.Values;
     }
