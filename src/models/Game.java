@@ -40,13 +40,13 @@ public class Game {
         this.Players = new Players();
         NumOfPlayers = numOfPlayers;
         CreatePlayers();
-        ResetGame();
+        InitDefaultValues();
         Gameplay();
     }
 
-    private void ResetGame() throws Exception
+    private void InitDefaultValues() throws Exception
     {
-        this.Rounds = new Round[1];
+        this.Rounds = new Round[3];
         CreateRounds();
         this.CurrentRound = 0;
         Wheel = new Wheel();
@@ -57,7 +57,6 @@ public class Game {
     {
         SinglyGenericNode<Player> playerNode = Players.GetPlayerByNumber(1);
         Player player = playerNode.GetData();
-        System.out.println("Player 1 GrandTotal: $"+player.GetGrandTotal());
         double max = player.GetGrandTotal();
         int index = 0;
         for(int x = 0; x < NumOfPlayers; x++)
@@ -74,7 +73,7 @@ public class Game {
 
         if(max <= 0)
         {
-            System.out.println("Nobody won the match.");
+            System.out.println("Sorry!, nobody won the match.");
         }
         else
         {
@@ -161,7 +160,7 @@ public class Game {
         {
             try
             {
-                ResetGame();
+                InitDefaultValues();
                 Gameplay();
             }catch (Exception e)
             {
