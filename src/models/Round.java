@@ -30,6 +30,11 @@ public class Round {
         RoundAttempt = numOfPlayers;
     }
 
+    public String GetCategory()
+    {
+        return this.Category;
+    }
+
     public boolean IsGuessable(char letter)
     {
         if(TrackedLetters.GetKVP(letter) != null) return false;
@@ -47,13 +52,11 @@ public class Round {
 
     public void UpdateWord(KVP kvp)
     {
-        System.out.println("WordToSolve: "+this.WordToSolve);
         StringBuilder builder = new StringBuilder(this.WordToSolve);
         String[] values = kvp.GetValues();
         char key = kvp.GetKey();
         for(int x = 0; x < values.length; x++)
         {
-            System.out.println("Key: "+key+"; Value: "+values[x]);
             if(values[x] != null)
             {
                 builder.setCharAt(Integer.parseInt(values[x]),key);
@@ -65,12 +68,14 @@ public class Round {
 
     public boolean SolvedWord()
     {
-        return Puzzle == WordToSolve;
+        return Puzzle.equals(WordToSolve);
     }
 
     public void UpdatePlayerTotal(int index, double amount)
     {
-        PlayerTotals[index] += amount;
+        double currentAmount = PlayerTotals[index];
+        currentAmount+= amount;
+        PlayerTotals[index] = currentAmount;
     }
 
     public double GetPlayerTotal(int index)
@@ -120,16 +125,7 @@ public class Round {
                 maxLetters--;
             }
         }
-        System.out.println("Round: ");
-        for(int x = 0; x < 127; x++){
-            KVP kvp = Dictionary.GetKVP((char)x);
-            if(kvp != null){
 
-                kvp.Display();
-            }
-        }
-        System.out.println("Puzzle: "+Puzzle.toString());
-        System.out.println("Puzzle_Missing: "+newWord.toString());
         return newWord.toString();
     }
 

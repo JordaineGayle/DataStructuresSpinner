@@ -71,12 +71,40 @@ public class Wheel {
     public void GenerateCards() throws Exception{
         CardTypes[] cardTypes = CardTypes.values();
         int cardTypesLength = cardTypes.length -1;
+        int bankruptCards = 3;
+        int lostTurnCards = 2;
         for (int i = 0; i < Length; i++){
             CardTypes cardType = cardTypes[GenerateRandomNumber(0,cardTypesLength)];
-            if(cardType == CardTypes.MONEY){
+            if(cardType == CardTypes.BANKRUPTCY && bankruptCards <= 0)
+            {
+                while (cardType != CardTypes.MONEY)
+                {
+                    cardType = cardTypes[GenerateRandomNumber(0,cardTypesLength)];
+                }
+            }
+            if(cardType == CardTypes.LOSE_TURN && lostTurnCards <= 0)
+            {
+                while (cardType != CardTypes.MONEY)
+                {
+                    cardType = cardTypes[GenerateRandomNumber(0,cardTypesLength)];
+                }
+            }
+
+            if(cardType == CardTypes.MONEY)
+            {
                 double moneyVal = GenerateRandomNumber(500,2500);
                 Append(new Card(cardType,moneyVal));
-            }else{
+            }
+            else
+            {
+                if(cardType == CardTypes.BANKRUPTCY)
+                {
+                    bankruptCards--;
+                }
+                else
+                {
+                    lostTurnCards--;
+                }
                 Append(new Card(cardType,0));
             }
         }

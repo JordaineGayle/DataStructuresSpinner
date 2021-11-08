@@ -4,11 +4,13 @@ public class KVP {
     char Key;
     String[] Values;
     int CurrentPosition;
+    int Count;
 
     public KVP(int length)
     {
         CurrentPosition = 0;
         this.Values = new String[length];
+        this.Count = 0;
     }
 
     public void Insert(char key, int value)
@@ -16,6 +18,7 @@ public class KVP {
         this.Key = key;
         Values[CurrentPosition] = Integer.toString(value);
         CurrentPosition++;
+        Count++;
     }
 
     public String[] GetValues()
@@ -26,6 +29,11 @@ public class KVP {
     public char GetKey()
     {
         return (char)Key;
+    }
+
+    public int GetCount()
+    {
+        return Count;
     }
 
     public void Display(){
