@@ -27,6 +27,13 @@ public class CustomDictionary {
         }
     }
 
+    public KVP DeleteAt(char key)
+    {
+        KVP deleted = Items[key];
+        Items[key] = null;
+        return deleted;
+    }
+
     public KVP GetKVP(char key)
     {
         return Items[key];

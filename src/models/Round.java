@@ -50,6 +50,16 @@ public class Round {
         return Dictionary.GetKVP(letter);
     }
 
+    public KVP GetKVP(char letter)
+    {
+        return Dictionary.GetKVP(letter);
+    }
+
+    public KVP DeleteLetter(char letter)
+    {
+        return Dictionary.DeleteAt(letter);
+    }
+
     public void UpdateWord(KVP kvp)
     {
         StringBuilder builder = new StringBuilder(this.WordToSolve);

@@ -1,40 +1,42 @@
 package structures.Nodes;
 
-public class SinglyGenericNode<T> {
-    private T Data;
-    private SinglyGenericNode<T> NextNode;
+import models.Player;
 
-    public SinglyGenericNode(T data, SinglyGenericNode<T> nextNode) throws Exception{
+public class PlayerNode {
+    private Player Data;
+    private PlayerNode NextNode;
+
+    public PlayerNode(Player data, PlayerNode nextNode) throws Exception{
         ValidateData(data);
         this.Data = data;
         this.NextNode = nextNode;
     }
 
-    public SinglyGenericNode(SinglyGenericNode<T> node) throws Exception{
+    public PlayerNode(PlayerNode node) throws Exception{
         if(node == null) throw new NullPointerException("The nodes cannot be null or empty.");
         ValidateData(node.Data);
         this.Data = node.Data;
         this.NextNode = node.NextNode;
     }
 
-    public void SetData(T data) throws Exception{
+    public void SetData(Player data) throws Exception{
         ValidateData(data);
         this.Data = data;
     }
 
-    public T GetData(){
+    public Player GetData(){
         return this.Data;
     }
 
-    public void SetNextNode(SinglyGenericNode<T> node){
+    public void SetNextNode(PlayerNode node){
         this.NextNode = node;
     }
 
-    public SinglyGenericNode<T> GetNextNode(){
+    public PlayerNode GetNextNode(){
         return this.NextNode;
     }
 
-    private void ValidateData(T data) throws Exception{
+    private void ValidateData(Player data) throws Exception{
         if(data == null) throw new NullPointerException("The nodes data property cannot be null or empty.");
     }
 }

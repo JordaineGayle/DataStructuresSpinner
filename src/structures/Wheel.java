@@ -2,14 +2,12 @@ package structures;
 
 import models.Card;
 import models.enums.CardTypes;
-import structures.Nodes.SinglyGenericNode;
-
-import java.util.Random;
+import structures.Nodes.CardNode;
 
 public class Wheel {
     private int Length;
-    private SinglyGenericNode<Card> Head;
-    private  SinglyGenericNode<Card> CurrentCard;
+    private CardNode Head;
+    private  CardNode CurrentCard;
 
     public Wheel() throws Exception
     {
@@ -19,7 +17,7 @@ public class Wheel {
         GenerateCards();
     }
 
-    public Wheel(SinglyGenericNode<Card> head) throws Exception{
+    public Wheel(CardNode head) throws Exception{
         Length = 25;
         this.Head = head;
         this.CurrentCard = this.Head;
@@ -28,16 +26,16 @@ public class Wheel {
 
     public void Append(Card card) throws Exception
     {
-        SinglyGenericNode<Card> newNode = new SinglyGenericNode<>(card,null);
+        CardNode newNode = new CardNode(card,null);
 
         if(this.Head == null)
         {
-            this.Head = new SinglyGenericNode(newNode);
+            this.Head = new CardNode(newNode);
             this.Head.SetNextNode(this.Head);
         }
         else
         {
-            SinglyGenericNode<Card> nextNode = this.Head.GetNextNode();
+            CardNode nextNode = this.Head.GetNextNode();
             while (nextNode.GetNextNode() != this.Head){
                 nextNode = nextNode.GetNextNode();
             }
@@ -51,7 +49,7 @@ public class Wheel {
     }
 
     public Card SpinWheel(){
-        SinglyGenericNode<Card> nextNode = Head;
+        CardNode nextNode = Head;
         if(CurrentCard != null){
             nextNode = CurrentCard;
         }
@@ -111,7 +109,7 @@ public class Wheel {
     }
 
     public void Display(){
-        SinglyGenericNode<Card> temp = Head;
+        CardNode temp = Head;
         while (temp.GetNextNode() != Head){
             temp.GetData().ToString();
             temp = temp.GetNextNode();

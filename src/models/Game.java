@@ -5,7 +5,7 @@ import database.WordsDB;
 import models.enums.CardTypes;
 import models.enums.Categories;
 import structures.KVP;
-import structures.Nodes.SinglyGenericNode;
+import structures.Nodes.PlayerNode;
 import structures.Players;
 import structures.Wheel;
 
@@ -14,12 +14,13 @@ import java.util.Scanner;
 public class Game {
     private final int WON_ROUND = 1, ACTIVE_ROUND = 2,LOST_ROUND = 3;
     private Wheel Wheel;
+    private char[] Vowels;
     private WordsDB Database;
     private Round[] Rounds;
     private structures.Players Players;
     private int CurrentRound;
     private int NumOfPlayers;
-    private SinglyGenericNode<Player> CurrentPlayerNode;
+    private PlayerNode CurrentPlayerNode;
 
     public Game() throws Exception
     {
@@ -36,6 +37,7 @@ public class Game {
 
     private void InitGame(int numOfPlayers) throws Exception
     {
+        this.Vowels = new char[]{'A','E','I','O','U'};
         this.Database = new WordsDB();
         this.Players = new Players();
         NumOfPlayers = numOfPlayers;
@@ -55,7 +57,7 @@ public class Game {
 
     private void DisplayWinner()
     {
-        SinglyGenericNode<Player> playerNode = Players.GetPlayerByNumber(1);
+        PlayerNode playerNode = Players.GetPlayerByNumber(1);
         Player player = playerNode.GetData();
         double max = player.GetGrandTotal();
         int index = 0;
@@ -172,6 +174,7 @@ public class Game {
         }
         else
         {
+            System.out.println("Thanks for playing, GOODBYE :). Hope to see you again, sn maybe ? Anyways thanks for playing!!!.");
             System.exit(0);
         }
     }
@@ -213,6 +216,42 @@ public class Game {
         return 0;
     }
 
+    private int BuyAVowel()
+    {
+        Round round = this.Rounds[CurrentRound];
+        KVP kvp = null;
+        double cardAmount = Wheel.GetCurrentCard().GetValue();
+        int playerIndex = CurrentPlayerNode.GetData().GetNumber()-1;
+        double amount = round.GetPlayerTotal(playerIndex);
+        if(amount <= 0){
+            System.out.println("You do not have enough money to guess a vowel.");
+            return -1;
+        }
+
+        for (int x = 0; x < this.Vowels.length; x++)
+        {
+            if(round.IsGuessable(this.Vowels[x]))
+            {
+                kvp = round.GetKVP(this.Vowels[x]);
+
+                if(kvp != null && (cardAmount * kvp.GetCount()) <= amount)
+                {
+                    double letterValue = cardAmount * kvp.GetCount();
+                    round.UpdatePlayerTotal(playerIndex,letterValue*-1);
+                    System.out.println("Vowel Bought: "+kvp.GetKey());
+                    System.out.println("Current Round Total: $"+amount);
+                    System.out.println("Vowel Price: $"+letterValue);
+                    System.out.println("Round Balance: $"+round.GetPlayerTotal(playerIndex));
+                    return kvp.GetKey();
+                }
+            }
+
+        }
+
+        System.out.println("Unable to find a vowel to match your request, or you don't have enough money to purchase a vowel");
+        return -1;
+    }
+
     private char Menu()
     {
         Round round = this.Rounds[this.CurrentRound];
@@ -229,7 +268,7 @@ public class Game {
 
     private int GuessLetter()
     {
-
+        boolean boughtVowel = false;
         Round round = this.Rounds[this.CurrentRound];
         Player player = CurrentPlayerNode.GetData();
         if(round.GetPlayerTotal(player.GetNumber() - 1) <= 0)
@@ -245,6 +284,14 @@ public class Game {
             letter = Menu();
         }
 
+        if(letter == '_')
+        {
+            int vowel = BuyAVowel();
+            if(vowel == -1) return GuessLetter();
+            letter = (char)vowel;
+            boughtVowel = true;
+        }
+
         if(!round.IsGuessable(letter)){
             System.out.println("Letter Guessed Already, Try Again.");
             return GuessLetter();
@@ -256,11 +303,16 @@ public class Game {
             {
                 round.UpdateWord(kvp);
                 double roundTotal = kvp.GetCount() * Wheel.GetCurrentCard().GetValue();
-                round.UpdatePlayerTotal(CurrentPlayerNode.GetData().GetNumber() - 1,roundTotal);
+                if(!boughtVowel)
+                {
+                    round.UpdatePlayerTotal(CurrentPlayerNode.GetData().GetNumber() - 1,roundTotal);
+                }
+                round.DeleteLetter(letter);
                 if(round.SolvedWord()) return WON_ROUND;
                 return ACTIVE_ROUND;
             }
         }
+
         System.out.println("Nice try, but you lost the round. Incorrect Letter.");
         return LOST_ROUND;
     }

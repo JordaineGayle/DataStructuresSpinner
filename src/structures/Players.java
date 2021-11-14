@@ -1,13 +1,12 @@
 package structures;
 
 import models.Player;
-import structures.Nodes.SinglyGenericNode;
-
+import structures.Nodes.PlayerNode;
 //this data structure was used, because the size of the players wasn't explicitly specified
 public class Players {
 
     int Length;
-    SinglyGenericNode<Player> Head;
+    PlayerNode Head;
 
     public Players()
     {
@@ -15,24 +14,24 @@ public class Players {
         Head = null;
     }
 
-    public Players(SinglyGenericNode<Player> head){
+    public Players(PlayerNode head){
         this.Head = head;
     }
 
     public void Append(Player player) throws Exception
     {
         player.SetNumber(Length+1);
-        SinglyGenericNode<Player> newNode = new SinglyGenericNode<>(player,null);
+        PlayerNode newNode = new PlayerNode(player,null);
 
         if(this.Head == null)
         {
-            this.Head = new SinglyGenericNode(newNode);
+            this.Head = new PlayerNode(newNode);
             this.Head.SetNextNode(this.Head);
             Length++;
         }
         else
         {
-            SinglyGenericNode<Player> nextNode = this.Head.GetNextNode();
+            PlayerNode nextNode = this.Head.GetNextNode();
             while (nextNode.GetNextNode() != this.Head){
                 nextNode = nextNode.GetNextNode();
             }
@@ -56,12 +55,12 @@ public class Players {
             return;
         }
 
-        SinglyGenericNode<Player> node = this.Head;
+        PlayerNode node = this.Head;
         int count = 0;
         while (true){
             if(count == index)
             {
-                SinglyGenericNode<Player> tempNode = this.Head;
+                PlayerNode tempNode = this.Head;
                 int c = 0;
                 if(index == 0){
                     index = Length-1;
@@ -95,10 +94,10 @@ public class Players {
         Display();
     }
 
-    public SinglyGenericNode<Player> GetPlayerByNumber(int number)
+    public PlayerNode GetPlayerByNumber(int number)
     {
 
-        SinglyGenericNode<Player> nextNode = this.Head;
+        PlayerNode nextNode = this.Head;
         int count = 0;
         while (nextNode.GetData().GetNumber() != number){
             nextNode = nextNode.GetNextNode();
@@ -116,7 +115,7 @@ public class Players {
             System.out.println("List is empty");
             return;
         }
-        SinglyGenericNode<Player> temp = Head;
+        PlayerNode temp = Head;
         while (temp.GetNextNode() != Head){
             System.out.println(temp.GetData().ToString());
             temp = temp.GetNextNode();

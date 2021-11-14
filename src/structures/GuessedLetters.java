@@ -1,54 +1,53 @@
 package structures;
-
-import structures.Nodes.DoublyGenericNode;
+import structures.Nodes.LetterNode;
 
 public class GuessedLetters {
 
-    DoublyGenericNode<Character> Head;
-    DoublyGenericNode<Character> Tail;
+    LetterNode Front;
+    LetterNode Rear;
     int Length;
 
     public GuessedLetters()
     {
-        this.Head = null;
-        this.Tail = null;
+        this.Front = null;
+        this.Rear = null;
         this.Length = 0;
     }
 
     public void Enqueue(Character guess) throws Exception{
         if(guess == null)return;
-        DoublyGenericNode<Character> node = new DoublyGenericNode<>(guess,null,null);
-        if(this.Head == null){
-            this.Tail = node;
-            this.Head = this.Tail;
+        LetterNode node = new LetterNode(guess,null,null);
+        if(this.Front == null){
+            this.Rear = node;
+            this.Front = this.Rear;
             Length++;
             return;
         }
 
-        Tail.SetNextNode(node);
-        node.SetPrevNode(this.Tail);
-        this.Tail = node;
+        Rear.SetNextNode(node);
+        node.SetPrevNode(this.Rear);
+        this.Rear = node;
         Length++;
     }
 
     public Character Dequeue(){
         if(IsEmpty())return null;
-        DoublyGenericNode<Character> node = this.Head;
-        if(this.Head == this.Tail){
+        LetterNode node = this.Front;
+        if(this.Front == this.Rear){
             Length--;
-            this.Head = null;
-            this.Tail = null;
+            this.Front = null;
+            this.Rear = null;
             return node.GetData();
         }
 
-        this.Head = this.Head.GetNextNode();
+        this.Front = this.Front.GetNextNode();
         Length--;
         return node.GetData();
     }
 
     public Character Peek(){
         if(!IsEmpty()){
-            return this.Head.GetData();
+            return this.Front.GetData();
         }
         return null;
     }
@@ -64,7 +63,7 @@ public class GuessedLetters {
     public void Display(){
         if(!IsEmpty()){
             System.out.print("Letters Guessed: ");
-            DoublyGenericNode<Character> temp = Head;
+            LetterNode temp = Front;
             while (temp.GetNextNode() != null){
                 System.out.print(temp.GetData().charValue());
                 temp = temp.GetNextNode();
