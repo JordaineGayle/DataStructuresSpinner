@@ -20,20 +20,28 @@ public class Game
 {
     //constants that are used to compare against round result
     protected final int WON_ROUND = 1, ACTIVE_ROUND = 2,LOST_ROUND = 3;
+
     //wheel list
     protected Wheel Wheel;
+
     //vowels array
     protected char[] Vowels;
+
     //words database
     protected WordsDB Database;
+
     //rounds array
     protected Round[] Rounds;
+
     //players list
     protected structures.Players Players;
+
     //current round value
     protected int CurrentRound;
+
     //number of players
     protected int NumOfPlayers;
+
     //current player node
     protected PlayerNode CurrentPlayerNode;
 
@@ -96,7 +104,9 @@ public class Game
             while (round == null){
                 try{
                     round = new Round(Categories.valueOf(word.GetCategory()),word.GetWord(),this.NumOfPlayers);
-                }catch (InvalidArgumentException e){
+                }
+                catch (Exception e)
+                {
                     round = null;
                 }
             }
