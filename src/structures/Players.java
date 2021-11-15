@@ -2,11 +2,11 @@ package structures;
 
 import models.Player;
 import structures.Nodes.PlayerNode;
-//this data structure was used, because the size of the players wasn't explicitly specified
+
 public class Players {
 
-    int Length;
-    PlayerNode Head;
+    private int Length;
+    private PlayerNode Head;
 
     public Players()
     {
@@ -18,10 +18,27 @@ public class Players {
         this.Head = head;
     }
 
+    public int GetLength() {
+        return Length;
+    }
+
+    public void SetLength(int length) {
+        Length = length;
+    }
+
+    public PlayerNode GetHead() {
+        return Head;
+    }
+
+    public void SetHead(PlayerNode head) {
+        Head = head;
+    }
+
     //insert at end
     public void Append(Player player) throws Exception
     {
         player.SetNumber(Length+1);
+        player.SetName((player.GetName()+"_"+player.GetNumber()).toUpperCase().replace(" ","_"));
         PlayerNode newNode = new PlayerNode(player,null);
 
         if(this.Head == null)
@@ -124,8 +141,20 @@ public class Players {
         System.out.println(temp.GetData().ToString());
     }
 
+    public void ResetGrandTotals(){
+        if(Head  == null){
+            return;
+        }
+        PlayerNode temp = Head;
+        while (temp.GetNextNode() != Head){
+            temp = temp.GetNextNode();
+            temp.GetData().ResetGrandTotal(0);
+        }
+        temp.GetData().ResetGrandTotal(0);
+    }
+
     public void DisplayLength(){
-        System.out.println("Length: "+Length);
+        System.out.println("Length: "+GetLength());
     }
 
 }

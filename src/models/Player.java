@@ -53,6 +53,10 @@ public class Player
         GrandTotal+=grandTotal;
     }
 
+    public void ResetGrandTotal(double grandTotal) {
+        GrandTotal=grandTotal;
+    }
+
     public String ToString() {
         return "[Name: "+Name+", Number: "+Number+", GrandTotal: "+GrandTotal+"]";
     }

@@ -1,0 +1,36 @@
+*************************************************************************************************************************************************************
+*                                                                                                                                                           *
+*                                                                      USER GAMEPLAY MANUAL                                                                 *
+*                                                                                                                                                           *
+*    This is a word game that challenges the players and builds their vocabulary.                                                                           *
+*                                                                                                                                                           *
+*    This game is made up of only has 3 rounds, with x number of players spinning a wheel that’s limited to 25 cards 5 of which has a 0 value.              *
+*                                                                                                                                                           *
+*    Currently, there are only three card types, MONEY, BANKRUPTCY & LOSE_A_TURN. Money card range from a value of 500-2500 dollars,                        *
+*    Bankruptcy cards are a value of zero, if you land a bankruptcy card you will lose all your earnings for the round and the moves                        *
+*    to the next player in line or to a new round if no players are left. Lose turn card are also a value of 0 but if you land a                            *
+*    lose turn card you get to keep the money accumulated for the round but the game advances to the next player or to the next round.                      *
+*                                                                                                                                                           *
+*    To begin playing this game you first need to enter the number of players the game should be created for, after entering                                *
+*    the number of players you will be prompted to enter the name of the players, have each player enter their game names.                                  *
+*                                                                                                                                                           *
+*    Once the players are entered the game will begin at player 1 prompting the player to spin the wheel, for every new round if the                        *
+*    player doesn’t have any earnings in the round, they must spin the wheel to begin the round or even to attempt solving the puzzle.                      *
+*                                                                                                                                                           *
+*    In spinning the wheel, you can land any of the three card types and the rule still applies whether you had money in the round or not.                  *
+*                                                                                                                                                           *
+*    While playing the game, if you are the current player of a round and had already spined the wheel and have money in the round you have                 *
+*    the option of spinning again, buy a vowel or solve the puzzle, otherwise you forced to spin the wheel to attempt solving the puzzle.                   *
+*                                                                                                                                                           *
+*    If a player has enough money in a round, they are able to buy a vowel, when buying a vowel, the total the cost of that vowel is the value              *
+*    of the card you landed when you first spined the wheel for that round multiplied by the occurrence of the vowel in the word, that cost                 *
+*    is then subtracted from your overall round total which lessen your chances of winning depending on how the other players are playing.                  *
+*                                                                                                                                                           *
+*    When a puzzle is solved the player who solved the puzzle gets to keep the money earned for that round and it gets added to their overall               *
+*    game earning which is further used to determine who is the winner of the game.                                                                         *
+*                                                                                                                                                           *
+*    Once we complete the last round the game will display the player on screen and prompt the players if they want to continue the game,                   *
+*    if a player selects ‘n’ they are removed from the game if the number of players is 2 and only player select ‘n’ then the game is cancelled.            *
+*    Upon restarting the values will reset.                                                                                                                 *
+*                                                                                                                                                           *
+*************************************************************************************************************************************************************
