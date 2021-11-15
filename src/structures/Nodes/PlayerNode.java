@@ -6,37 +6,47 @@ public class PlayerNode {
     private Player Data;
     private PlayerNode NextNode;
 
-    public PlayerNode(Player data, PlayerNode nextNode) throws Exception{
-        ValidateData(data);
-        this.Data = data;
-        this.NextNode = nextNode;
+    public PlayerNode(){};
+
+    public PlayerNode(Player data, PlayerNode nextNode) throws Exception
+    {
+        SetData(data);
+        SetNextNode(nextNode);
     }
 
-    public PlayerNode(PlayerNode node) throws Exception{
+    public PlayerNode(PlayerNode node) throws Exception
+    {
         if(node == null) throw new NullPointerException("The nodes cannot be null or empty.");
-        ValidateData(node.Data);
-        this.Data = node.Data;
-        this.NextNode = node.NextNode;
+        SetData(node.GetData());
+        SetNextNode(node.GetNextNode());
     }
 
-    public void SetData(Player data) throws Exception{
-        ValidateData(data);
-        this.Data = data;
-    }
-
-    public Player GetData(){
+    //accessors
+    public Player GetData()
+    {
         return this.Data;
     }
 
-    public void SetNextNode(PlayerNode node){
-        this.NextNode = node;
-    }
-
-    public PlayerNode GetNextNode(){
+    public PlayerNode GetNextNode()
+    {
         return this.NextNode;
     }
 
-    private void ValidateData(Player data) throws Exception{
+    //mutators
+    public void SetData(Player data) throws Exception
+    {
+        ValidateData(data);
+        this.Data = data;
+    }
+
+    public void SetNextNode(PlayerNode node)
+    {
+        this.NextNode = node;
+    }
+
+    //validate the data portion of the node
+    private void ValidateData(Player data) throws Exception
+    {
         if(data == null) throw new NullPointerException("The nodes data property cannot be null or empty.");
     }
 }

@@ -14,11 +14,11 @@ public class CardNode {
     //next card node
     private CardNode NextNode;
 
+    public CardNode(){};
+
     //primary constructor for card node
     public CardNode(Card data, CardNode nextNode) throws Exception
     {
-        //validates the card data
-        ValidateData(data);
         SetData(data);
         SetNextNode(nextNode);
     }
@@ -27,7 +27,6 @@ public class CardNode {
     public CardNode(CardNode node) throws Exception
     {
         if(node == null) throw new NullPointerException("The nodes cannot be null or empty.");
-        ValidateData(node.GetData());
         SetData(node.Data);
         SetNextNode(node.NextNode);
     }

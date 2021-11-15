@@ -1,43 +1,76 @@
 package structures.Nodes;
-
-public class LetterNode {
+/**
+ * LetterNode Class
+ * {
+ *     Author: X
+ *     StudentId: X
+ *     Desc: defines the  structure
+ * }
+ * */
+public class LetterNode
+{
+    //data property
     private Character Data;
+    //next letter node
     private LetterNode NextNode;
+    //previous letter node
     private LetterNode PrevNode;
 
-    public LetterNode(Character data, LetterNode nextNode, LetterNode prevNode) throws Exception{
-        ValidateData(data);
-        this.Data = data;
-        this.NextNode = nextNode;
-        this.PrevNode = prevNode;
+    //default constructor
+    public LetterNode(){};
+
+    //primary constructor
+    public LetterNode(Character data, LetterNode nextNode, LetterNode prevNode) throws Exception
+    {
+        SetData(data);
+        SetNextNode(nextNode);
+        SetPrevNode(prevNode);
     }
 
-    public void SetData(Character data) throws Exception{
-        ValidateData(data);
-        this.Data = data;
+    //copy constructor
+    public LetterNode(LetterNode node) throws Exception
+    {
+        SetData(node.GetData());
+        SetNextNode(node.GetNextNode());
+        SetPrevNode(node.GetPrevNode());
     }
 
-    public Character GetData(){
+    //accessors
+    public Character GetData()
+    {
         return this.Data;
     }
 
-    public void SetNextNode(LetterNode node){
-        this.NextNode = node;
-    }
-
-    public LetterNode GetNextNode(){
+    public LetterNode GetNextNode()
+    {
         return this.NextNode;
     }
 
-    public void SetPrevNode(LetterNode node){
-        this.PrevNode = node;
-    }
-
-    public LetterNode GetPrevNode(){
+    public LetterNode GetPrevNode()
+    {
         return this.PrevNode;
     }
 
-    private void ValidateData(Character data) throws Exception{
+    //mutators
+    public void SetData(Character data) throws Exception
+    {
+        ValidateData(data);
+        this.Data = data;
+    }
+
+    public void SetNextNode(LetterNode node)
+    {
+        this.NextNode = node;
+    }
+
+    public void SetPrevNode(LetterNode node)
+    {
+        this.PrevNode = node;
+    }
+
+    //validates the data portion of the node
+    private void ValidateData(Character data) throws Exception
+    {
         if(data == null) throw new NullPointerException("The nodes data property cannot be null or empty.");
     }
 }

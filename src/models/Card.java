@@ -65,12 +65,12 @@ public class Card
         return this.Value;
     }
 
-    //mutators
-    public void SetType(CardTypes type) {
+    //mutators - not needed
+    private void SetType(CardTypes type) {
         Type = type;
     }
 
-    public void SetValue(double value) {
+    private void SetValue(double value) {
         Value = value;
     }
 
