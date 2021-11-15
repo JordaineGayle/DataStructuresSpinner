@@ -18,6 +18,7 @@ public class Players {
         this.Head = head;
     }
 
+    //insert at end
     public void Append(Player player) throws Exception
     {
         player.SetNumber(Length+1);

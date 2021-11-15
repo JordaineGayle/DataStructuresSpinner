@@ -135,7 +135,6 @@ public class Round {
                 maxLetters--;
             }
         }
-
         return newWord.toString();
     }
 

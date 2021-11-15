@@ -60,7 +60,8 @@ public class GuessedLetters {
         return this.Length;
     }
 
-    public void Display(){
+    /*
+    * public void Display(){
         if(!IsEmpty()){
             System.out.print("Letters Guessed: ");
             LetterNode temp = Front;
@@ -68,7 +69,37 @@ public class GuessedLetters {
                 System.out.print(temp.GetData().charValue());
                 temp = temp.GetNextNode();
             }
+
             System.out.print(temp.GetData().charValue());
+        }else{
+            System.out.println("No Letters Guessed");
+        }
+    }
+    * */
+
+    public void Display(){
+        if(!IsEmpty()){
+            GuessedLetters tempQueue = new GuessedLetters();
+            System.out.print("Letters Guessed: ");
+            LetterNode temp = Front;
+            while (temp != null){
+                System.out.print(temp.GetData().charValue());
+                try{
+                    tempQueue.Enqueue(Dequeue());
+                }catch (Exception ex){}
+                temp = temp.GetNextNode();
+            }
+
+            temp = tempQueue.Front;
+
+            while(temp != null)
+            {
+                try{
+                    Enqueue(tempQueue.Dequeue());
+                }catch (Exception ex){}
+                temp = temp.GetNextNode();
+            }
+
         }else{
             System.out.println("No Letters Guessed");
         }

@@ -17,6 +17,14 @@ public class Wheel {
         GenerateCards();
     }
 
+    public Wheel(Wheel wheel) throws Exception
+    {
+        Length = wheel.Length;
+        Head = wheel.Head;
+        CurrentCard = wheel.CurrentCard;
+        GenerateCards();
+    }
+
     public Wheel(CardNode head) throws Exception{
         Length = 25;
         this.Head = head;
@@ -75,17 +83,11 @@ public class Wheel {
             CardTypes cardType = cardTypes[GenerateRandomNumber(0,cardTypesLength)];
             if(cardType == CardTypes.BANKRUPTCY && bankruptCards <= 0)
             {
-                while (cardType != CardTypes.MONEY)
-                {
-                    cardType = cardTypes[GenerateRandomNumber(0,cardTypesLength)];
-                }
+                cardType = CardTypes.MONEY;
             }
             if(cardType == CardTypes.LOSE_TURN && lostTurnCards <= 0)
             {
-                while (cardType != CardTypes.MONEY)
-                {
-                    cardType = cardTypes[GenerateRandomNumber(0,cardTypesLength)];
-                }
+                cardType = CardTypes.MONEY;
             }
 
             if(cardType == CardTypes.MONEY)

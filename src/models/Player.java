@@ -14,7 +14,6 @@ public class Player
         Number = 1;
         GrandTotal = 0;
     }
-
     //primary constructor
     public Player(String name, int number, double grandTotal)
     {

@@ -1,10 +1,7 @@
 package database;
-
 import models.Word;
 import models.enums.Categories;
-
 import java.io.File;
-import java.io.RandomAccessFile;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -56,7 +53,6 @@ public class WordsDB {
         }
         return null;
     }
-
 
     public Word GetRandomWord(){
         Random rand = new Random();
