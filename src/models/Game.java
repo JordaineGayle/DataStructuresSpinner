@@ -94,7 +94,7 @@ public class Game {
             Player player = CurrentPlayerNode.GetData();
             Round round = Rounds[CurrentRound];
             int roundResult = 0;
-            ClearScreen();
+            //ClearScreen();
             PlayersInfo(player);
             roundResult = GuessLetter();
 
@@ -167,7 +167,7 @@ public class Game {
             }catch (Exception e)
             {
                 e.printStackTrace();
-                System.out.println("unable to play again, try restarting thee game.");
+                System.out.println("unable to play again, try restarting the game.");
                 System.exit(0);
             }
 
