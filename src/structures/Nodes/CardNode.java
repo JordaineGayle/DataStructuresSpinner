@@ -1,42 +1,63 @@
 package structures.Nodes;
-
 import models.Card;
-
+/**
+ * CardNode Class
+ * {
+ *     Author: X
+ *     StudentId: X
+ *     Desc: defines the  structure
+ * }
+ * */
 public class CardNode {
+    //card data
     private Card Data;
+    //next card node
     private CardNode NextNode;
 
-    public CardNode(Card data, CardNode nextNode) throws Exception{
+    //primary constructor for card node
+    public CardNode(Card data, CardNode nextNode) throws Exception
+    {
+        //validates the card data
         ValidateData(data);
-        this.Data = data;
-        this.NextNode = nextNode;
+        SetData(data);
+        SetNextNode(nextNode);
     }
 
-    public CardNode(CardNode node) throws Exception{
+    //copy constructor for card node
+    public CardNode(CardNode node) throws Exception
+    {
         if(node == null) throw new NullPointerException("The nodes cannot be null or empty.");
-        ValidateData(node.Data);
-        this.Data = node.Data;
-        this.NextNode = node.NextNode;
+        ValidateData(node.GetData());
+        SetData(node.Data);
+        SetNextNode(node.NextNode);
     }
 
-    public void SetData(Card data) throws Exception{
+    public void SetData(Card data) throws Exception
+    {
         ValidateData(data);
         this.Data = data;
     }
 
-    public Card GetData(){
+    //accessors
+    public Card GetData()
+    {
         return this.Data;
     }
 
-    public void SetNextNode(CardNode node){
-        this.NextNode = node;
-    }
-
-    public CardNode GetNextNode(){
+    public CardNode GetNextNode()
+    {
         return this.NextNode;
     }
 
-    private void ValidateData(Card data) throws Exception{
+    //mutators
+    public void SetNextNode(CardNode node)
+    {
+        this.NextNode = node;
+    }
+
+    //validates that the data inputted is not null
+    private void ValidateData(Card data) throws Exception
+    {
         if(data == null) throw new NullPointerException("The nodes data property cannot be null or empty.");
     }
 }

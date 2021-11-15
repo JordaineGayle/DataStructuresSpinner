@@ -1,5 +1,12 @@
 package models;
-
+/**
+ * Player Class
+ * {
+ *     Author: X
+ *     StudentId: X
+ *     Desc: defines the  structure
+ * }
+ * */
 public class Player
 {
     //attributes
@@ -10,54 +17,68 @@ public class Player
     //default constructor
     public Player()
     {
-        Name = "";
-        Number = 1;
-        GrandTotal = 0;
+        SetName("");
+        SetNumber(1);
+        SetGrandTotal(0);
     }
     //primary constructor
     public Player(String name, int number, double grandTotal)
     {
-        Name = name;
-        Number = number;
-        GrandTotal = grandTotal;
-    }
-    //copy constructors
-    public Player(Player p) {
-        Name = p.Name;
-        Number = p.Number;
-        GrandTotal = p.GrandTotal;
+        SetName(name);
+        SetNumber(number);
+        SetGrandTotal(grandTotal);
     }
 
-    //accessors and mutators
-    public String GetName() {
+    //copy constructors
+    public Player(Player p)
+    {
+        SetName(p.Name);
+        SetNumber(p.Number);
+        SetGrandTotal(p.GrandTotal);
+    }
+
+    //accessors
+
+    public String GetName()
+    {
         return Name;
     }
 
-    public void SetName(String name) {
-        Name = name;
-    }
-
-    public int GetNumber() {
+    public int GetNumber()
+    {
         return Number;
     }
 
-    public void SetNumber(int number) {
-        Number = number;
-    }
-
-    public double GetGrandTotal() {
+    public double GetGrandTotal()
+    {
         return GrandTotal;
     }
 
-    public void SetGrandTotal(double grandTotal) {
+    //mutators
+
+    public void SetName(String name)
+    {
+        Name = name;
+    }
+
+    public void SetNumber(int number)
+    {
+        Number = number;
+    }
+
+    public void SetGrandTotal(double grandTotal)
+    {
         GrandTotal+=grandTotal;
     }
 
-    public void ResetGrandTotal(double grandTotal) {
+    public void ResetGrandTotal(double grandTotal)
+    {
         GrandTotal=grandTotal;
     }
 
-    public String ToString() {
+    //displays what's inside the player class
+    public String ToString()
+    {
         return "[Name: "+Name+", Number: "+Number+", GrandTotal: "+GrandTotal+"]";
     }
 }
