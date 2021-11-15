@@ -1,10 +1,5 @@
 package database;
-
-import models.Word;
-import models.enums.Categories;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class UserManual {
